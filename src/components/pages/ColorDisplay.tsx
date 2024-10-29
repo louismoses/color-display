@@ -13,7 +13,7 @@ const ColorDisplay = () => {
                     <GridItem className="border max-h-screen overflow-auto">
                         <ColorList />
                     </GridItem>
-                    <GridItem className="order-first md:order-last">
+                    <GridItem className="order-first lg:order-last">
                         <ColorPreview />
                     </GridItem>
                 </Grid>

@@ -14,7 +14,7 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({
     return (
         <div
             style={style}
-            className={`${className}  h-[30vh] md:h-full max-h-[40vh] flex flex-col text-center justify-center items-center mix-blend-multiply`}
+            className={`${className}  h-[30vh] lg:h-full max-h-[40vh] flex flex-col text-center justify-center items-center mix-blend-multiply`}
         >
             {children}
         </div>
