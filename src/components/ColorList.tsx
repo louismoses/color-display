@@ -1,6 +1,6 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useColorStore from "../store/useColorStore";
 import Button from "./Button";
 
 type ColorList = {
@@ -15,29 +15,31 @@ interface ColorResponse {
 }
 
 const ColorList = () => {
+    //Fetch colors
     const getColors = async (): Promise<ColorResponse> => {
         const response = await axios.get(
             "https://api.prolook.com/api/colors/prolook"
         );
-        console.log(response);
         return response.data?.colors;
     };
 
     const {
         data: colors,
-        isLoading,
+        isLoading: isFetchingColors,
     }: { data: ColorList[] | undefined; isLoading: boolean } = useQuery({
         queryKey: ["colors"],
         queryFn: getColors,
     });
 
+    // set color to preview
+    const { setColor } = useColorStore();
     const colorPreview = (color: ColorList) => {
-        console.log(color);
+        setColor(color);
     };
 
     return (
         <>
-            {isLoading ? (
+            {isFetchingColors ? (
                 <p className="p-3">Loading...</p>
             ) : (
                 <div>
