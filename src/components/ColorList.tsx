@@ -18,7 +18,7 @@ const ColorList = () => {
     //Fetch colors
     const getColors = async (): Promise<ColorResponse> => {
         const response = await axios.get(
-            "https://api.prolook.com/api/colors/prolook"
+            "https://api.rolook.com/api/colors/prolook"
         );
         return response.data?.colors;
     };
@@ -26,7 +26,12 @@ const ColorList = () => {
     const {
         data: colors,
         isLoading: isFetchingColors,
-    }: { data: ColorList[] | undefined; isLoading: boolean } = useQuery({
+        isError: isErrorFetchingColors,
+    }: {
+        data: ColorList[] | undefined;
+        isLoading: boolean;
+        isError: boolean;
+    } = useQuery({
         queryKey: ["colors"],
         queryFn: getColors,
     });
@@ -39,6 +44,10 @@ const ColorList = () => {
 
     return (
         <>
+            {isErrorFetchingColors ? (
+                <p className="p-3">Error fetching colors</p>
+            ) : null}
+
             {isFetchingColors ? (
                 <p className="p-3">Loading...</p>
             ) : (
