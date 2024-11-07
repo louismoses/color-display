@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import useColorStore from "../store/useColorStore";
 import Button from "./Button";
@@ -17,10 +16,12 @@ interface ColorResponse {
 const ColorList = () => {
     //Fetch colors
     const getColors = async (): Promise<ColorResponse> => {
-        const response = await axios.get(
-            "https://api.rolook.com/api/colors/prolook"
+        const response = await fetch(
+            "https://api.prolook.com/api/colors/prolook"
         );
-        return response.data?.colors;
+        const data = await response.json();
+        console.log(data);
+        return data?.colors;
     };
 
     const {
